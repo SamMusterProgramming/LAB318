@@ -25,12 +25,40 @@ function flatten(arr) {
     else  flatArray.push(arr)
     return flatArray ;
 }
-
-const dummyArray = flatten([1,2,[1,2,3,[1,2,3]],2,5,[5,6,4]])
-console.log(dummyArray)
+flatArray = []
+const dummyArray1 = flatten([1,2,[1,2,3,[1,2,3]],2,5,[5,6,4]])
+console.log(dummyArray1)
 
 // [
 //     1, 2, 1, 2, 3, 1,
 //     2, 3, 2, 5, 5, 6,
 //     4
 //   ]
+const dummyArray2 = flatten([1,2,[1,2,3,[1,2,3,[10,11,12,13,14]]],2,5,[5,6,4]])
+console.log(dummyArray2)
+
+//[
+//     1, 2, 1,  2,  3,  1,  2,  3, 2,
+//     5, 5, 6,  4,  1,  2,  1,  2, 3,
+//     1, 2, 3, 10, 11, 12, 13, 14, 2,
+//     5, 5, 6,  4
+//   ]
+
+
+function trampoline(fn) {
+    return function trampolined(...args) {
+      let result = fn(...args);
+  
+      while (typeof result === 'function') {
+        result = result();
+      }
+  
+      return result;
+    };
+  }
+  flatArray = []
+  const trampolineFlatten = trampoline(flatten);
+  const dummyArray3 = trampolineFlatten([1,2,[1,2,3,[1,2,3,[10,11,12,13,14]]],2,5,[5,6,4]])
+
+
+  console.log(dummyArray3)
