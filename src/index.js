@@ -61,4 +61,41 @@ function trampoline(fn) {
   const dummyArray3 = trampolineFlatten([1,2,[1,2,3,[1,2,3,[10,11,12,13,14]]],2,5,[5,6,4]])
 
 
-  console.log(dummyArray3)
+  console.log(dummyArray3);
+
+
+  
+  let body = document.querySelector('body');
+
+
+  function  isPrime(num) {
+    let isPrime = "true"
+    if ( num == 1 || num == 2 )  {isPrime = true  }
+    else{
+    for(let i = 3 ;  i <= num/2; i++) {
+          if (num % i == 0)  { isPrime = false; }
+    }
+    }
+    return isPrime;
+  }
+
+  function addPrimeNumbers(n) {
+    for(let i = 1 ; i <= n; i++  ) {
+      if(isPrime(i)){ console.log(i)
+      let pText = document.createElement('p');
+      pText.textContent = `${i}`  
+      body.appendChild(pText) ;   
+    }
+    }
+    // add timeout to delay the alert 
+    setTimeout(() => {
+      window.alert('calculation is finished')
+     }, n/10);
+  }
+ 
+  addPrimeNumbers(1000)
+
+
+
+
+  
